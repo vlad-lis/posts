@@ -1,6 +1,7 @@
 import { ReactElement, useEffect, useState } from 'react';
 import { TPost, getPosts } from '../../utils/api';
 import { POSTS_PER_PAGE } from '../../utils/constants';
+import PostListItem from '../../components/PostListItem/PostListItem';
 
 const AllPosts = (): ReactElement => {
   const [loadedPosts, setLoadedPosts] = useState<TPost[]>([]);
@@ -42,13 +43,12 @@ const AllPosts = (): ReactElement => {
 
   return (
     <main>
-      <p>ALL POSTS PAGE</p>
+      <h1>ALL POSTS PAGE</h1>
       <ul>
         {displayedPosts.map((post) => {
           return (
             <li key={post.id}>
-              <p>{post.title}</p>
-              <p>{post.body}</p>
+              <PostListItem id={post.id} title={post.title} body={post.body} />
             </li>
           );
         })}
