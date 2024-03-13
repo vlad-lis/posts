@@ -1,6 +1,7 @@
 import { ReactElement, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PostDetails from '../../components/PostDetails/PostDetails';
+import Loader from '../../components/Loader/Loader';
 import {
   TComment,
   TPost,
@@ -18,9 +19,12 @@ const SinglePostPage = (): ReactElement => {
   const [loadedPost, setLoadedPost] = useState<TPost | null>(null);
   const [postAuthor, setPostAuthor] = useState<TUserInfo | null>(null);
   const [postComments, setPostComments] = useState<TComment[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // load post and user data
   useEffect(() => {
+    setIsLoading(true);
+
     if (!postId) {
       setLoadingError('Error fetching data: corrupt post ID');
       return;
@@ -51,12 +55,17 @@ const SinglePostPage = (): ReactElement => {
       } catch (err) {
         setLoadingError(`An error occurred while fetching data: ${err}`);
       } finally {
-        console.log('done');
+        setIsLoading(false);
       }
     };
 
     loadPost();
   }, [postId]);
+
+  // show loader
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <main className={styles.singlepost}>
