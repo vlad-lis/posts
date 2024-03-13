@@ -4,9 +4,9 @@ import { TPost, getPosts } from '../../utils/api';
 import { POSTS_PER_PAGE } from '../../utils/constants';
 import PostListItem from '../../components/PostListItem/PostListItem';
 import Pagination from '../../components/Pagination/Pagination';
-import styles from './AllPosts.module.scss';
+import styles from './AllPostsPage.module.scss';
 
-const AllPosts = (): ReactElement => {
+const AllPostsPage = (): ReactElement => {
   const [loadedPosts, setLoadedPosts] = useState<TPost[]>([]);
   const [loadingError, setLoadingError] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -75,4 +75,4 @@ const AllPosts = (): ReactElement => {
   );
 };
 
-export default AllPosts;
+export default AllPostsPage;

@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-const SinglePost = (): ReactElement => {
+const SinglePostPage = (): ReactElement => {
   return (
     <div>
       <p>SINGLE POST PAGE</p>
@@ -8,4 +8,4 @@ const SinglePost = (): ReactElement => {
   );
 };
 
-export default SinglePost;
+export default SinglePostPage;
