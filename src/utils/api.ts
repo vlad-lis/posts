@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { BASE_URL } from './constants';
 
 export type TPost = {
@@ -8,11 +8,19 @@ export type TPost = {
   body: string;
 };
 
-export const getPosts = async () => {
-  try {
-    const res = await axios.get(BASE_URL);
+type TUserInfo = {
+  name: string;
+};
 
-    console.log(res.data);
+type ApiResponse<T> = {
+  success: boolean;
+  data?: T;
+  status?: number;
+};
+
+const fetchData = async <T>(url: string): Promise<ApiResponse<T>> => {
+  try {
+    const res: AxiosResponse<T> = await axios.get(url);
     return {
       success: true,
       data: res.data,
@@ -27,6 +35,19 @@ export const getPosts = async () => {
   }
 };
 
-export const getPost = {
-  // todo: single post api
+// fetch all posts
+export const getPosts = async (): Promise<ApiResponse<TPost[]>> => {
+  return fetchData<TPost[]>(`${BASE_URL}/posts`);
+};
+
+// fetch a single post
+export const getPost = async (postId: string): Promise<ApiResponse<TPost>> => {
+  return fetchData<TPost>(`${BASE_URL}/posts/${postId}`);
+};
+
+// fetch user info
+export const getUser = async (
+  userId: number
+): Promise<ApiResponse<TUserInfo>> => {
+  return fetchData<TUserInfo>(`${BASE_URL}/${userId}`);
 };
