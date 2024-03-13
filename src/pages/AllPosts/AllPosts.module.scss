@@ -1,13 +1,13 @@
 .allposts {
   display: flex;
   flex-direction: column;
-  margin: 35px 0;
+  margin: 40px 0;
   gap: 15px;
 
   &__title {
     color: #ffffff;
     font-size: 52px;
-    margin: 0;
+    margin: 0 0 10px 0;
   }
 
   &__pagination {

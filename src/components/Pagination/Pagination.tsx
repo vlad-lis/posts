@@ -1,4 +1,5 @@
 import { ReactElement } from 'react';
+import styles from './Pagination.module.scss';
 
 type TPaginationProps = {
   currentPage: number;
@@ -14,15 +15,21 @@ const Pagination = ({
   onNextClick,
 }: TPaginationProps): ReactElement => {
   return (
-    <div>
-      <button type='button' onClick={onPrevClick} disabled={currentPage === 1}>
+    <div className={styles.pagination}>
+      <button
+        type='button'
+        className={styles.pagination__btn}
+        onClick={onPrevClick}
+        disabled={currentPage === 1}
+      >
         Previous
       </button>
-      <span>
+      <span className={styles.pagination__page}>
         Page {currentPage} of {totalPages}
       </span>
       <button
         type='button'
+        className={styles.pagination__btn}
         onClick={onNextClick}
         disabled={currentPage === totalPages}
       >

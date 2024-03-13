@@ -1,0 +1,28 @@
+.pagination {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  &__btn {
+    border: none;
+    padding: 3px;
+    border-radius: 3px;
+    width: 80px;
+
+    &:not(:disabled) {
+      &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+      }
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  &__page {
+    color: #ffffff;
+    width: 100px;
+  }
+}
