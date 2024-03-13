@@ -16,13 +16,19 @@ const AllPostsPage = (): ReactElement => {
     const loadPosts = async () => {
       try {
         const res = await getPosts();
-        if (res.success && res.data) {
-          setLoadedPosts(res.data);
-        } else if (res.status) {
-          setLoadingError(`Error fetching data: ${res.status}`);
-        } else {
-          setLoadingError('Something went wrong');
+
+        if (!res.success || !res.data) {
+          setLoadingError(
+            res.status
+              ? `Error fetching data: ${res.status}`
+              : 'Something went wrong'
+          );
+          return;
         }
+
+        setLoadedPosts(res.data);
+      } catch (err) {
+        setLoadingError(`An error occurred while fetching posts: ${err}`);
       } finally {
         console.log('done');
       }
@@ -46,7 +52,10 @@ const AllPostsPage = (): ReactElement => {
 
   return (
     <main className={styles.allposts}>
-      <h1 className={styles.allposts__title}>Post Feed Explorer</h1>
+      <h1 className={styles.allposts__title}>
+        <span className={styles['allposts__title-span']}>Post</span> Feed
+        Explorer
+      </h1>
       <div className={styles.allposts__pagination}>
         <Pagination
           currentPage={currentPage}

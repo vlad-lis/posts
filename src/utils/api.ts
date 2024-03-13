@@ -8,7 +8,7 @@ export type TPost = {
   body: string;
 };
 
-type TUserInfo = {
+export type TUserInfo = {
   name: string;
 };
 
@@ -18,6 +18,7 @@ type ApiResponse<T> = {
   status?: number;
 };
 
+// general fetch function
 const fetchData = async <T>(url: string): Promise<ApiResponse<T>> => {
   try {
     const res: AxiosResponse<T> = await axios.get(url);
@@ -49,5 +50,5 @@ export const getPost = async (postId: string): Promise<ApiResponse<TPost>> => {
 export const getUser = async (
   userId: number
 ): Promise<ApiResponse<TUserInfo>> => {
-  return fetchData<TUserInfo>(`${BASE_URL}/${userId}`);
+  return fetchData<TUserInfo>(`${BASE_URL}/users/${userId}`);
 };

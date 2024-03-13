@@ -1,15 +1,25 @@
 import { ReactElement } from 'react';
+import styles from './PostDetails.module.scss';
 
 type TPostDetailsrops = {
-  id: number;
-  title: string;
-  body: string;
+  title: string | undefined;
+  body: string | undefined;
+  author: string | undefined;
 };
 
-const PostDetails = (): ReactElement => {
+const PostDetails = ({
+  title,
+  body,
+  author,
+}: TPostDetailsrops): ReactElement => {
   return (
-    <section>
-      <p>post details</p>
+    <section className={styles.post}>
+      <h3 className={styles.post__heading}>
+        <span className={styles.post__title}>{title}</span>
+        <br />
+        By {author}
+      </h3>
+      <p className={styles.post__body}>{body}</p>
     </section>
   );
 };
