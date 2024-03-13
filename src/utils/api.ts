@@ -12,6 +12,12 @@ export type TUserInfo = {
   name: string;
 };
 
+export type TComment = {
+  id: number;
+  email: string;
+  body: string;
+};
+
 type ApiResponse<T> = {
   success: boolean;
   data?: T;
@@ -44,6 +50,13 @@ export const getPosts = async (): Promise<ApiResponse<TPost[]>> => {
 // fetch a single post
 export const getPost = async (postId: string): Promise<ApiResponse<TPost>> => {
   return fetchData<TPost>(`${BASE_URL}/posts/${postId}`);
+};
+
+// fetch post comments
+export const getComments = async (
+  postId: string
+): Promise<ApiResponse<TComment[]>> => {
+  return fetchData<TComment[]>(`${BASE_URL}/posts/${postId}/comments`);
 };
 
 // fetch user info

@@ -1,0 +1,16 @@
+.comment {
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  &__text {
+    margin: 0;
+  }
+
+  &__email {
+    font-weight: 700;
+  }
+}
