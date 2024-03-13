@@ -1,7 +1,10 @@
 import { ReactElement, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { TPost, getPosts } from '../../utils/api';
 import { POSTS_PER_PAGE } from '../../utils/constants';
 import PostListItem from '../../components/PostListItem/PostListItem';
+import Pagination from '../../components/Pagination/Pagination';
+import styles from './AllPosts.module.scss';
 
 const AllPosts = (): ReactElement => {
   const [loadedPosts, setLoadedPosts] = useState<TPost[]>([]);
@@ -38,37 +41,36 @@ const AllPosts = (): ReactElement => {
   );
 
   // pagination clicks
-  const nextPage = () => setCurrentPage(currentPage + 1);
-  const prevPage = () => setCurrentPage(currentPage - 1);
+  const handlePrevPageClick = () => setCurrentPage(currentPage - 1);
+  const handleNextPageClick = () => setCurrentPage(currentPage + 1);
 
   return (
-    <main>
-      <h1>ALL POSTS PAGE</h1>
-      <ul>
+    <main className={styles.allposts}>
+      <h1 className={styles.allposts__title}>Post Feed Explorer</h1>
+      <div className={styles.allposts__pagination}>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPrevClick={handlePrevPageClick}
+          onNextClick={handleNextPageClick}
+        />
+      </div>
+      <ul className={styles.allposts__list}>
         {displayedPosts.map((post) => {
           return (
             <li key={post.id}>
-              <PostListItem id={post.id} title={post.title} body={post.body} />
+              <Link to={`/posts/${post.id}`} className={styles.allposts__post}>
+                <PostListItem
+                  id={post.id}
+                  title={post.title}
+                  body={post.body}
+                />
+              </Link>
             </li>
           );
         })}
       </ul>
       <p>{loadingError}</p>
-      <div>
-        <button type='button' onClick={prevPage} disabled={currentPage === 1}>
-          Previous
-        </button>
-        <span>
-          Page {currentPage} of {totalPages}
-        </span>
-        <button
-          type='button'
-          onClick={nextPage}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
-      </div>
     </main>
   );
 };

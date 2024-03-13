@@ -1,4 +1,5 @@
 import { ReactElement } from 'react';
+import styles from './PostListItem.module.scss';
 
 type TPostListItemProps = {
   id: number;
@@ -12,11 +13,13 @@ const PostListItem = ({
   body,
 }: TPostListItemProps): ReactElement => {
   return (
-    <>
-      <p>{id}</p>
-      <p>{title}</p>
-      <p>{body}</p>
-    </>
+    <div className={styles.post}>
+      <div className={styles['post__title-wrapper']}>
+        <p className={styles.post__title}>#{id}</p>
+        <h5 className={styles.post__title}>{title}</h5>
+      </div>
+      <p className={styles.post__body}>{body}</p>
+    </div>
   );
 };
 

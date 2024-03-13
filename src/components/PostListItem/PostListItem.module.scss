@@ -1,0 +1,38 @@
+.post {
+  text-decoration: none;
+  color: #000000;
+  background-color: #ffffff;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #e4e5e6;
+    box-shadow: 0 0 17px #e4e5e6;
+  }
+
+  &__title-wrapper {
+    display: flex;
+    gap: 7px;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  &__body {
+    margin: 0;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+}
